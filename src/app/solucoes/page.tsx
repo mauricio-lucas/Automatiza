@@ -39,31 +39,42 @@ export default function SolucoesPage() {
 
         {/* Cards */}
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtradas.map((s) => (
-            <article
-              key={s.id}
-              className="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors hover:border-indigo-500/40"
-            >
-              <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">
-                {s.categoria}
-              </span>
-              <h2 className="mt-2 text-lg font-semibold text-white">{s.titulo}</h2>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-400">
-                {s.descricao}
-              </p>
-              <p className="mt-4 text-xs text-slate-500">📦 Entregável: {s.entrega}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {s.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-slate-300"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </article>
-          ))}
+          {filtradas.map((s) => {
+            const card = (
+              <article
+                className={`flex h-full flex-col rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors hover:border-indigo-500/40 ${
+                  s.demoUrl ? "cursor-pointer" : ""
+                }`}
+              >
+                <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">
+                  {s.categoria}
+                </span>
+                <h2 className="mt-2 text-lg font-semibold text-white">{s.titulo}</h2>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-400">
+                  {s.descricao}
+                </p>
+                <p className="mt-4 text-xs text-slate-500">📦 Entregável: {s.entrega}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {s.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-slate-300"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            );
+
+            return s.demoUrl ? (
+              <a key={s.id} href={s.demoUrl} download className="block">
+                {card}
+              </a>
+            ) : (
+              <div key={s.id}>{card}</div>
+            );
+          })}
         </div>
 
         {filtradas.length === 0 && (

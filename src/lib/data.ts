@@ -99,9 +99,20 @@ export interface Solucao {
   descricao: string;
   entrega: string; // entrega associada na EAP
   tags: string[];
+  demoUrl?: string;
 }
 
 export const solucoes: Solucao[] = [
+  {
+    id: "backup-python",
+    titulo: "Backup criptografado de dados",
+    categoria: "Python & Dados",
+    descricao:
+      "Os arquivos são criptografados, o detentor da chave de decriptografia é o cliente. O backup é feito de forma incremental e diferencial.",
+    entrega: "EAP 1.3.2 — Automações com Python",
+    tags: ["cryptography", "backup", "python"],
+    demoUrl: "/demos/backup_cripto.zip",
+  },
   {
     id: "etl-python",
     titulo: "ETL de planilhas e bases de dados",
